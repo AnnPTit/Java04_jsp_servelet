@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Home -Admin</title>
+</head>
+<body>
+	<div class="card">
+		<div class="card-header">
+			<h3 class="card-title">DataTable with default features</h3>
+		</div>
+		<!-- /.card-header -->
+		<div class="card-body">
+			<table id="example1" class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Link</th>
+						<th>Total Like</th>
+						<th>Total View</th>
+
+					</tr>
+				</thead>
+				<c:forEach items="${listVideo }" var="x" varStatus="i">
+					<tbody>
+						<tr>
+							<td>${x.title }</td>
+							<td>${x.href }
+							</td>
+							<td>${i.index }</td>
+							<td>${x.views }</td>
+						</tr>
+					</tbody>
+				</c:forEach>
+
+				<tfoot>
+					<tr>
+						<th>Rendering engine</th>
+						<th>Browser</th>
+						<th>Platform(s)</th>
+						<th>Engine version</th>
+						<th>CSS grade</th>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<!-- /.card-body -->
+	</div>
+</body>
+</html>

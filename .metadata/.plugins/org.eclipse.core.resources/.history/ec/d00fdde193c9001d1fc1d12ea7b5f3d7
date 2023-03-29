@@ -1,0 +1,174 @@
+package repository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Query;
+
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
+
+import customModel.videoCustomModel;
+import entity.Video;
+import util.HibernateUtil;
+
+public class VideoRepository {
+	public List<Video> getList() {
+		List<Video> list = new ArrayList<Video>();
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			Query query = session.createQuery("FROM Video where isActive=1 order by views desc");
+			list = query.getResultList();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return null;
+
+	}
+
+	public List<Video> getListSortByViewUp() {
+		List<Video> list = new ArrayList<Video>();
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			Query query = session.createQuery("FROM Video where isActive=1 order by views asc");
+			list = query.getResultList();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return null;
+
+	}
+//			query = session.createQuery("select e.name, a.city from Employee e "
+//+ "INNER JOIN e.address a");
+
+	public List<videoCustomModel> getListSortByLikeUp() {
+		List<videoCustomModel> list = new ArrayList<videoCustomModel>();
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			SQLQuery<Object[]> query = session.createSQLQuery(
+					"select video.id,video.title,video.href,SUM(CAST(history.isLiked as int)) as totalLike,video.views,video.shares,video.description from video"
+							+ "	join history on history.videoId = video.id 	where video.isActive =1 "
+							+ "	group by video.id,title,href,views,shares,description ");
+			List<Object[]> objects = query.list();
+			System.out.println("List :" + objects.size());
+			System.out.println(objects.toArray().toString());
+//			for (videoCustomModel videoCustomModel : list) {
+//				System.out.println(videoCustomModel.getId());
+//			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return null;
+
+	}
+
+	public Video getVideo(int id) {
+		Video video = new Video();
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			Query query = session.createQuery("FROM Video where id =:id and isActive=1");
+			query.setParameter("id", id);
+			video = (Video) query.getSingleResult();
+			return video;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return null;
+	}
+
+	public Video getVideoByHref(String href) {
+		Video video = new Video();
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			Query query = session.createQuery("FROM Video where href =:href and isActive=1");
+			query.setParameter("href", href);
+			video = (Video) query.getSingleResult();
+			return video;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return null;
+	}
+
+	public Boolean updateView(int videoID, int view) {
+		Transaction transaction = null;
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("Update Video set views=:view where id=:id");
+			query.setParameter("view", view + 1);
+			query.setParameter("id", videoID);
+			query.executeUpdate();
+			transaction.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return false;
+	}
+
+	public Boolean updateShare(int videoID, int view) {
+		Transaction transaction = null;
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("Update Video set shares=:view where id=:id");
+			query.setParameter("view", view + 1);
+			query.setParameter("id", videoID);
+			query.executeUpdate();
+			transaction.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return false;
+	}
+
+	public Boolean create(Video video) {
+		Transaction transaction = null;
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			transaction = session.beginTransaction();
+			session.save(video);
+			/*
+			 * query.setParameter("view", view + 1); query.setParameter("id", videoID);
+			 * query.executeUpdate();
+			 */
+			transaction.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return false;
+	}
+
+	public Boolean update(Video video) {
+		Transaction transaction = null;
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			transaction = session.beginTransaction();
+			session.update(video);
+			/*
+			 * query.setParameter("view", view + 1); query.setParameter("id", videoID);
+			 * query.executeUpdate();
+			 */
+			transaction.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return false;
+	}
+
+	public Boolean delete(int videoID) {
+		Transaction transaction = null;
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("Update Video set isActive=0 where id=:id");
+
+			query.setParameter("id", videoID);
+			query.executeUpdate();
+			transaction.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return false;
+	}
+}
