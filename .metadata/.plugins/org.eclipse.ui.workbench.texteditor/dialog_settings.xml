@@ -6,10 +6,13 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="like"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
-			<item value="like"/>
+			<item value="tm-catalog-item-list"/>
+			<item value=".tm-catalog-item-lis"/>
+			<item value="Contact"/>
 			<item value="home"/>
+			<item value="like"/>
 			<item value="bu"/>
 			<item value="btn"/>
 			<item value="Starter Page"/>

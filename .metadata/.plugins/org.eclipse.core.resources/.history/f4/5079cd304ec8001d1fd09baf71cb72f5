@@ -1,9 +1,0 @@
-package customModel;
-
-public class videoCustomModel {
-
-	private int id;
-	private String title, href;
-	private int like, view, share;
-	private String description;
-}

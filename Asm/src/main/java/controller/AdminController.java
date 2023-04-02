@@ -72,7 +72,6 @@ public class AdminController extends HttpServlet {
 		} else if (page.equals("video")) {
 			List<Video> liVideos = videoRepository.getList();
 			request.setAttribute("page", page);
-
 			request.setAttribute("listVideo", liVideos);
 			request.getRequestDispatcher("/admins/Admin.jsp").forward(request, response);
 			return;
@@ -85,8 +84,34 @@ public class AdminController extends HttpServlet {
 			this.sortDownLike(request, response);
 		} else if ("showUserLike".equals(action)) {
 			this.showUserLike(request, response);
+		}else if ("sortUpView".equals(action)) {
+			this.sortUpView(request, response);
+		}else if ("sortDownView".equals(action)) {
+			this.sortDownView(request, response);
 		}
 
+	}
+
+	private void sortDownView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<videoCustomModel> list = new ArrayList<>();
+		list = videoRepository.getListSortByViewDown();
+		System.out.println(list.size());
+		System.out.println(list.get(0).getTitle());
+		request.setAttribute("listVideo", list);
+		request.getRequestDispatcher("/admins/Admin.jsp").forward(request, response);
+		return;
+		
+	}
+
+	private void sortUpView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<videoCustomModel> list = new ArrayList<>();
+		list = videoRepository.getListSortByViewUp();
+		System.out.println(list.size());
+		System.out.println(list.get(0).getTitle());
+		request.setAttribute("listVideo", list);
+		request.getRequestDispatcher("/admins/Admin.jsp").forward(request, response);
+		return;
+		
 	}
 
 	private void showUserLike(HttpServletRequest request, HttpServletResponse response)

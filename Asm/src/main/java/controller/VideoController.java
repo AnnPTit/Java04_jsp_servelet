@@ -20,9 +20,8 @@ import repository.UserRepository;
 import repository.VideoRepository;
 import util.EmailUtility;
 
-@WebServlet(urlPatterns = { "/views/video", "/video/detail", 
-		"/like", "/views/favorite", 
-		"/views/sendEmail", "/share","/video" })
+@WebServlet(urlPatterns = { "/views/video", "/video/detail", "/like", "/views/favorite", "/views/sendEmail", "/share",
+		"/video", "/views/search" })
 public class VideoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,8 +39,8 @@ public class VideoController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
 		String uri = request.getRequestURI();
+
 		System.out.println(uri);
 		if (uri.contains("detail")) {
 			this.detailVideo(request, response);
@@ -54,11 +53,14 @@ public class VideoController extends HttpServlet {
 			return;
 		} else if (uri.contains("favorite")) {
 			this.favorite(request, response);
+		} else if (uri.contains("search")) {
+//			request.getRequestDispatcher("/views/video.jsp").forward(request, response);
+			this.search(request, response);
+
 		} else if (uri.contains("views/video")) {
 			HttpSession session1 = request.getSession();
 			String username = (String) session1.getAttribute("username");
 			request.setAttribute("username", username);
-			
 
 			liVideos = videoRepository.getList();
 			int size = liVideos.size();
@@ -66,21 +68,21 @@ public class VideoController extends HttpServlet {
 			if (size % 6 != 0) {
 				itemPerPage++;
 			}
-			
+
 			String page = request.getParameter("page");
 			int index = 0;
-			if(page == null) {
-				index =1;
-			}else {
+			if (page == null) {
+				index = 1;
+			} else {
 				index = Integer.valueOf(page);
 			}
 			liVideos = videoRepository.paginationVideo(index);
 			request.setAttribute("itemPerPage", itemPerPage);
 			HttpSession session11 = request.getSession();
 			int log = 0;
-			if(session11.getAttribute("isLogin") == null) {
+			if (session11.getAttribute("isLogin") == null) {
 				log = 0;
-			}else {
+			} else {
 				log = (Integer) session11.getAttribute("isLogin");
 			}
 			request.setAttribute("isLogin", log);
@@ -116,9 +118,9 @@ public class VideoController extends HttpServlet {
 		String username = (String) session.getAttribute("username");
 		HttpSession session11 = request.getSession();
 		int log = 0;
-		if(session11.getAttribute("isLogin") == null) {
+		if (session11.getAttribute("isLogin") == null) {
 			log = 0;
-		}else {
+		} else {
 			log = (Integer) session11.getAttribute("isLogin");
 		}
 		String path = request.getContextPath();
@@ -225,6 +227,27 @@ public class VideoController extends HttpServlet {
 			videoRepository.updateShare(video.getId(), video.getShares());
 			System.out.println("Cap nhat share thanh cong");
 		}
+//		if (uri.contains("search")) {
+//			this.search(request, response);
+//		}
+	}
+
+	private void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		HttpSession session11 = request.getSession();
+		int log = 0;
+		if (session11.getAttribute("isLogin") == null) {
+			log = 0;
+		} else {
+			log = (Integer) session11.getAttribute("isLogin");
+		}
+		request.setAttribute("isLogin", log);
+		String title = request.getParameter("key");
+		List<Video> liVideos = videoRepository.getVideoByTitle(title);
+		request.setAttribute("list", liVideos);
+		request.getRequestDispatcher("/views/video.jsp").forward(request, response);
+//		String path = request.getContextPath();
+//		response.sendRedirect(path + "/views/video");
 	}
 
 	private void guiMail(HttpServletRequest request, HttpServletResponse response) {

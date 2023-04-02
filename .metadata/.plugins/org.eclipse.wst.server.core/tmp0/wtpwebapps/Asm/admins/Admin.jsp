@@ -37,9 +37,9 @@
 				<li class="nav-item"><a class="nav-link" data-widget="pushmenu"
 					href="#" role="button"><i class="fas fa-bars"></i></a></li>
 				<li class="nav-item d-none d-sm-inline-block"><a
-					href="index3.html" class="nav-link">Home</a></li>
-				<li class="nav-item d-none d-sm-inline-block"><a href="#"
-					class="nav-link">Contact</a></li>
+					href="${pageContext.request.contextPath}/views/video" class="nav-link">Home</a></li>
+				<li class="nav-item d-none d-sm-inline-block"><a href="${pageContext.request.contextPath }/views/logout"
+					class="nav-link">Logout</a></li>
 			</ul>
 
 			<!-- Right navbar links -->
@@ -184,7 +184,7 @@
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
 								<li class="breadcrumb-item"><a
-									href="${pageContext.request.contextPath}/admin">Home</a></li>
+									href="${pageContext.request.contextPath}/admins/Admin">Home</a></li>
 								<li class="breadcrumb-item active">Starter Page</li>
 							</ol>
 						</div>

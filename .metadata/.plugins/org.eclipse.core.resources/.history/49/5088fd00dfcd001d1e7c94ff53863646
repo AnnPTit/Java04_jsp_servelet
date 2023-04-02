@@ -1,0 +1,21 @@
+package fillter;
+
+import javax.servlet.DispatcherType;
+import javax.servlet.annotation.WebFilter;
+
+@WebFilter(urlPatterns = "/*",dispatcherTypes = DispatcherType.REQUEST)
+public class UTF8EncodingFillter {
+
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+		//HttpServletRequest httpRequest = (HttpServletRequest)request;
+		//HttpServletResponse httpResponse = (HttpServletResponse)response;
+		
+		request.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		
+		chain.doFilter(request, response);
+	}
+	
+}

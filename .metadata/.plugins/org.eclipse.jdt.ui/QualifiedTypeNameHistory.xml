@@ -17,7 +17,6 @@
     <fullyQualifiedTypeName name="org.hibernate.query.NativeQuery"/>
     <fullyQualifiedTypeName name="org.hibernate.hql.internal.ast.SqlASTFactory"/>
     <fullyQualifiedTypeName name="org.hibernate.SQLQuery"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="org.hibernate.hql.internal.ast.tree.Statement"/>
     <fullyQualifiedTypeName name="repository.VideoRepository"/>
     <fullyQualifiedTypeName name="javax.persistence.Query"/>
@@ -26,10 +25,11 @@
     <fullyQualifiedTypeName name="customModel.videoCustomModel"/>
     <fullyQualifiedTypeName name="customModel.UserCustomModel"/>
     <fullyQualifiedTypeName name="java.lang.Long"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="util.HibernateUtil"/>
-    <fullyQualifiedTypeName name="entity.Video"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="java.lang.NullPointerException"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="entity.Video"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
 </qualifiedTypeNameHistroy>

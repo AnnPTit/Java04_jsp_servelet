@@ -5,12 +5,23 @@
 
 	<div class="row">
 		<div class="col-12">
-			<h2 class="tm-page-title mb-4" style="margin : 20px 0">Our Video Catalog</h2>
-			
+			<h2 class="tm-page-title mb-4" style="margin: 20px 0">Our Video
+				Catalog</h2>
+			<form action="${pageContext.request.contextPath}/views/search"
+				method="get">
+				<div class="input-group mb-3">
+					<input type="text" class="form-control"
+						placeholder="Recipient's username" name="key"
+						aria-label="Recipient's username" aria-describedby="button-addon2"
+						style="background-color: transparent;">
+					<button class="btn btn-outline-secondary" type="submit"
+						id="button-addon2">Search</button>
+				</div>
+			</form>
 		</div>
 	</div>
 
-	<div class="row tm-catalog-item-list">
+	<div class="row ">
 		<c:forEach items="${list}" var="x" varStatus="viTri">
 			<div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
 				<div class="position-relative tm-thumbnail-container">
@@ -25,8 +36,9 @@
 				</div>
 				<div class="p-4 tm-bg-gray tm-catalog-item-description">
 					<a style="text-decoration: none;"
-						href="${pageContext.request.contextPath}/video/detail?index=${x.id}"><h3
-							class="tm-text-primary mb-3 tm-catalog-item-title">${x.title}</h3></a>
+						href="${pageContext.request.contextPath}/video/detail?index=${x.id}">
+						<h3 class="tm-text-primary mb-3 tm-catalog-item-title">${x.title}</h3>
+					</a>
 					<p class="tm-catalog-item-text">${x.description }</p>
 					View : <span>${x.views}</span> <br>Shares : <span>${x.shares}</span>
 				</div>

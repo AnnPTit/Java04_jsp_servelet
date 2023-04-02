@@ -1,11 +1,5 @@
 @charset "UTF-8";
 
-:root { -
-	-primary-color: #1c1d1b; -
-	-primary--font: "Kanit", sans-serif; -
-	-white-color: #fff; -
-	-balck--color: #000;
-}
 
 html {
 	margin: 0;

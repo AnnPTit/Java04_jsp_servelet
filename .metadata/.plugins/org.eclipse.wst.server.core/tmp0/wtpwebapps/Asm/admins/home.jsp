@@ -32,7 +32,16 @@
 							href="${pageContext.request.contextPath}/admins/Admin?page=home&action=sortDownLike"><img
 								alt="" style="width: 20px; height: 20px"
 								src="https://cdn-icons-png.flaticon.com/512/5422/5422495.png"></a>
-						<th>Total View</th>
+						<th>Total View
+						<a class="" style="width: 20px; height: 20px"
+							href="${pageContext.request.contextPath}/admins/Admin?page=home&action=sortUpView"><img
+								alt="" style="width: 20px; height: 20px"
+								src="https://cdn-icons-png.flaticon.com/512/5422/5422517.png"></a>
+							<a class="" style="width: 20px; height: 20px"
+							href="${pageContext.request.contextPath}/admins/Admin?page=home&action=sortDownView"><img
+								alt="" style="width: 20px; height: 20px"
+								src="https://cdn-icons-png.flaticon.com/512/5422/5422495.png"></a>
+						</th>
 						<th>Total Share</th>
 					</tr>
 				</thead>

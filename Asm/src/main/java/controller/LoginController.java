@@ -19,7 +19,7 @@ import util.EmailUtility;
  * Servlet implementation class LoginController
  */
 @WebServlet(urlPatterns = { "/views/login", "/views/register", "/views/forgot", "/forgot", "/views/changepass",
-		"/changepass" ,"/views/logout"})
+		"/changepass", "/views/logout" })
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,7 +28,6 @@ public class LoginController extends HttpServlet {
 	 */
 	UserRepository userRepository = new UserRepository();
 	EmailUtility emailUtility = new EmailUtility();
-
 
 	public LoginController() {
 		super();
@@ -41,7 +40,7 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
+
 		String uri = request.getRequestURI();
 		if (uri.contains("login")) {
 			request.getRequestDispatcher("/views/login.jsp").forward(request, response);
@@ -84,7 +83,7 @@ public class LoginController extends HttpServlet {
 //				request.getRequestDispatcher("/views/login.jsp").forward(request, response);
 				String path = request.getContextPath();
 				response.sendRedirect(path + "/views/login");
-				
+
 			} else {
 				user = userRepository.logIn(username, password);
 			}
@@ -93,9 +92,11 @@ public class LoginController extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("username", username);
 				session.setAttribute("password", password);
-				session.setAttribute("isLogin", 1);
+				session.setAttribute("isLogin",1);
+				session.setAttribute("isAdmin", 0);
 				String path = request.getContextPath();
 				if (user.getIsAdmin() == true) {
+					session.setAttribute("isAdmin", 1);
 					response.sendRedirect(path + "/admins/Admin");
 				} else {
 //					response.sendRedirect(path + "/views/video");
@@ -110,21 +111,21 @@ public class LoginController extends HttpServlet {
 			} else {
 				request.setAttribute("error", "This account is not valid!");
 				request.getRequestDispatcher("/views/login.jsp").forward(request, response);
-				
+
 			}
 		}
 
-			if (uri.contains("forgot")) {
-				try {
-					this.sendNewPass(request, response);
-				} catch (MessagingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} else if (uri.contains("changepass")) {
-				this.changePass(request, response);
+		if (uri.contains("forgot")) {
+			try {
+				this.sendNewPass(request, response);
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		
+		} else if (uri.contains("changepass")) {
+			this.changePass(request, response);
+		}
+
 	}
 
 	private void changePass(HttpServletRequest request, HttpServletResponse response)

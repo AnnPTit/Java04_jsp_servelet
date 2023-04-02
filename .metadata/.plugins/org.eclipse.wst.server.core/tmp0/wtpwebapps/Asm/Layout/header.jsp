@@ -20,8 +20,9 @@
 									</span>
 								</button>
 								<div class="collapse navbar-collapse tm-nav" id="navbar-nav">
-									
+
 									<ul class="navbar-nav text-uppercase">
+									
 										<li class="nav-item active"><a
 											class="nav-link tm-nav-link"
 											href="${pageContext.request.contextPath }/views/video">Home
@@ -35,13 +36,13 @@
 											href="${pageContext.request.contextPath }/views/favorite">My
 												Favorites <span class="sr-only">(current)</span>
 										</a></li>
-										<li class="nav-item">
-										
-										<c:if test="${isLogin == 1}"><a class="nav-link tm-nav-link"
-											href="${pageContext.request.contextPath }/views/logout">Logout</a></c:if>
-											<c:if test="${isLogin == 0}"><a class="nav-link tm-nav-link"
-											href="${pageContext.request.contextPath }/views/login">Login</a></c:if>
-										</li>
+										<li class="nav-item"><c:if test="${isLogin == 1}">
+												<a class="nav-link tm-nav-link"
+													href="${pageContext.request.contextPath }/views/logout">Logout</a>
+											</c:if> <c:if test="${isLogin == 0}">
+												<a class="nav-link tm-nav-link"
+													href="${pageContext.request.contextPath }/views/login">Login</a>
+											</c:if></li>
 										<li class="nav-item"><a class="nav-link tm-nav-link"
 											href="${pageContext.request.contextPath }/views/register">Resgister</a></li>
 										<li class="nav-item"><a class="nav-link tm-nav-link"
@@ -54,6 +55,8 @@
 					</div>
 				</div>
 			</div>
+			
+
 		</div>
 		<div class="tm-welcome-container text-center text-white">
 			<div class="tm-welcome-container-inner">

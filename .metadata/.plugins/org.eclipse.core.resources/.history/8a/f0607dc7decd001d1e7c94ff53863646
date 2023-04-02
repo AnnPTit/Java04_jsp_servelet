@@ -1,0 +1,8 @@
+package fillter;
+
+import javax.servlet.annotation.WebFilter;
+
+@WebFilter(urlPatterns = {})
+public class UTF8EncodingFillter {
+
+}
