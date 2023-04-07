@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <main>
 
 	<div class="row">
 		<div class="col-12">
-			<h2 class="tm-page-title mb-4" style="margin: 20px 0">Our Video
-				Catalog</h2>
+			<h2 class="tm-page-title mb-4" style="margin: 20px 0"><fmt:message key="memu.video" /></h2>
 			<form action="${pageContext.request.contextPath}/views/search"
 				method="get">
 				<div class="input-group mb-3">
