@@ -18,5 +18,8 @@ public interface HistoryImpl {
 	Boolean unlike(int userId, int videoId);
 
 	List<History> getFavorite(int userID);
+	
+	public Boolean updateHistory(History history);
+	
 
 }

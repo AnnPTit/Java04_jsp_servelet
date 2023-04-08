@@ -63,10 +63,10 @@ public class VideoController extends HttpServlet {
 		} else if (uri.contains("views/video")) {
 			HttpSession session1 = request.getSession();
 			String username = (String) session1.getAttribute("username");
-			String avatar = (String) session1.getAttribute("avartar");			
-			if(avatar == null) {
-				avatar ="user.png";
-			}		
+			String avatar = (String) session1.getAttribute("avartar");
+			if (avatar == null) {
+				avatar = "user.png";
+			}
 			liVideos = videoRepository.getList();
 			int size = liVideos.size();
 			int itemPerPage = size / 6;
@@ -171,14 +171,12 @@ public class VideoController extends HttpServlet {
 	private void detailVideo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
 		String index = request.getParameter("index");
 		int id = Integer.valueOf(index);
 		Video video = videoRepository.getVideo(id);
 //		Tang 1 view 
 		videoRepository.updateView(video.getId(), video.getViews());
 //		---------------
-
 //		Kiem tra xem da dang nhap chua 
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
@@ -205,6 +203,7 @@ public class VideoController extends HttpServlet {
 				history.setVideo(video);
 				history.setViewDate(new Date());
 				history.setIsLiked(false);
+				history.setIsShared(false);
 				history.setLikedDate(null);
 				historyRepository.createHistory(history);
 				System.out.println("Them Thanh cong history");
@@ -234,6 +233,20 @@ public class VideoController extends HttpServlet {
 			Video video = videoRepository.getVideo(Integer.valueOf(id));
 			this.guiMail(request, response);
 			videoRepository.updateShare(video.getId(), video.getShares());
+			// Cap nhat isShare in History
+			HttpSession session = request.getSession();
+			String username = (String) session.getAttribute("username");
+			String path = request.getContextPath();
+			if(username == null) {
+				response.sendRedirect(path + "/views/login");
+			}else {
+				User user = userRepository.getUserbyUserName(username);
+				History history = new History();
+				history = historyRepository.getHistoryByUserIdAndVideoId(user.getId(), video.getId());
+				history.setIsShared(true);
+				historyRepository.updateHistory(history);
+				
+			}
 			System.out.println("Cap nhat share thanh cong");
 		}
 //		if (uri.contains("search")) {
@@ -250,10 +263,18 @@ public class VideoController extends HttpServlet {
 		} else {
 			log = (Integer) session11.getAttribute("isLogin");
 		}
+
+		String avatar = (String) session11.getAttribute("avartar");
+		if (avatar == null) {
+			avatar = "user.png";
+		}
+		request.setAttribute("avatar", avatar);
 		request.setAttribute("isLogin", log);
 		String title = request.getParameter("key");
 		List<Video> liVideos = videoRepository.getVideoByTitle(title);
 		request.setAttribute("list", liVideos);
+
+		request.setAttribute("content", "content");
 		request.getRequestDispatcher("/views/video.jsp").forward(request, response);
 //		String path = request.getContextPath();
 //		response.sendRedirect(path + "/views/video");
@@ -264,6 +285,7 @@ public class VideoController extends HttpServlet {
 			String email = request.getParameter("email");
 			String href = request.getParameter("href");
 			emailUtility.guiMail(email, " Xem Video Cùng Tôi : https://www.youtube.com/embed/" + href);
+			System.out.println("Gui mail thanh cong toi : "+email);
 			String path = request.getContextPath();
 			response.sendRedirect(path + "/views/video");
 		} catch (Exception e) {

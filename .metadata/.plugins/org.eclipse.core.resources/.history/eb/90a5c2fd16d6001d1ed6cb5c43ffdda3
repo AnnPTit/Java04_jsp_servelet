@@ -1,0 +1,116 @@
+package repository;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Query;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import entity.History;
+import entity.User;
+import entity.Video;
+import repository.Impl.HistoryImpl;
+import util.HibernateUtil;
+
+public class HistoryRepository implements HistoryImpl {
+
+	@Override
+	public History getHistoryByUserIdAndVideoId(int user, int video) {
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			Query query = session.createQuery("FROM History where userId=:userid and videoId=:videoid");
+			query.setParameter("userid", user);
+			query.setParameter("videoid", video);
+			History history = (History) query.getSingleResult();
+			return history;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return null;
+	}
+
+	@Override
+	public Boolean updateViewDate(int userId, int videoId, Date date) {
+		Transaction transaction = null;
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("Update History set viewDate=:date where userId=:userId and videoId =: videoId");
+			query.setParameter("date", date);
+			query.setParameter("userId", userId);
+			query.setParameter("videoId", videoId);
+			query.executeUpdate();
+			transaction.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean createHistory(History history) {
+		Transaction tran = null;
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			tran = session.beginTransaction();
+			session.save(history);
+			tran.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean like(int userId, int videoId) {
+		Transaction transaction = null;
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery(
+					"Update History set isLiked=1 , likedDate =:date where userId=:userId and videoId =: videoId");
+			query.setParameter("date", new Date());
+			query.setParameter("userId", userId);
+			query.setParameter("videoId", videoId);
+			query.executeUpdate();
+			transaction.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean unlike(int userId, int videoId) {
+		Transaction transaction = null;
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("Update History set isLiked = 0 where userId=:userId and videoId =: videoId");
+			query.setParameter("userId", userId);
+			query.setParameter("videoId", videoId);
+			query.executeUpdate();
+			transaction.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return false;
+	}
+
+	@Override
+	public List<History> getFavorite(int userID) {
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			Query query = session.createQuery("FROM History where userId=:userid and isLiked =1");
+			query.setParameter("userid", userID);
+			List<History> history = query.getResultList();
+			return history;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return null;
+	}
+
+}

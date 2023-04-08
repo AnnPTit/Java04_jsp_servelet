@@ -6,9 +6,13 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="avatar"/>
+		<item key="selection" value="doPost"/>
 		<list key="findhistory">
+			<item value="doPost"/>
+			<item value="show"/>
 			<item value="avatar"/>
+			<item value="uploadService"/>
+			<item value="search"/>
 			<item value="my"/>
 			<item value="respone."/>
 			<item value="res"/>
@@ -19,10 +23,6 @@
 			<item value="like"/>
 			<item value="bu"/>
 			<item value="btn"/>
-			<item value="Starter Page"/>
-			<item value="nav-icon fas fa-tachometer-alt"/>
-			<item value="img-circle elevation-2"/>
-			<item value="brand-link"/>
 		</list>
 		<list key="replacehistory">
 		</list>

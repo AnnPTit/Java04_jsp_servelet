@@ -312,4 +312,26 @@ public class VideoRepository implements VideoImpl {
 		}
 		return ds;
 	}
+
+
+	@Override
+	public List<UserCustomModel> showUserShare(int videoId) {
+		List<UserCustomModel> list = new ArrayList<UserCustomModel>();
+		try (Session session = HibernateUtil.getFACTORY().openSession();) {
+			Query query = session.createNativeQuery(
+					"select [user].username,email from [user] join history on history.userId = [user].id  where videoId =:videoId and isShared =1 ");
+			query.setParameter("videoId", videoId);
+			List<Object[]> liObjects = query.getResultList();
+			liObjects.forEach((p) -> {
+				UserCustomModel userCustomModel = new UserCustomModel();
+				userCustomModel.setUsername((String) p[0]);
+				userCustomModel.setEmail((String) p[1]);
+				list.add(userCustomModel);
+			});
+			return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
 }

@@ -15,6 +15,9 @@ public class UploadService {
 			String fileName = part.getSubmittedFileName();
 			String uploadFile = "/upload/" + fileName;
 			String realPath = request.getRealPath(uploadFile);
+			if(fileName.equalsIgnoreCase("")) {
+				return null;
+			}
 			part.write(realPath);
 			return fileName;
 		} catch (Exception e) {

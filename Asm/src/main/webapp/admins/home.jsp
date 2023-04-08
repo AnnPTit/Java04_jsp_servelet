@@ -32,8 +32,7 @@
 							href="${pageContext.request.contextPath}/admins/Admin?page=home&action=sortDownLike"><img
 								alt="" style="width: 20px; height: 20px"
 								src="https://cdn-icons-png.flaticon.com/512/5422/5422495.png"></a>
-						<th>Total View
-						<a class="" style="width: 20px; height: 20px"
+						<th>Total View <a class="" style="width: 20px; height: 20px"
 							href="${pageContext.request.contextPath}/admins/Admin?page=home&action=sortUpView"><img
 								alt="" style="width: 20px; height: 20px"
 								src="https://cdn-icons-png.flaticon.com/512/5422/5422517.png"></a>
@@ -55,7 +54,9 @@
 							<td>${x.share}</td>
 							<td><a
 								href="${pageContext.request.contextPath}/admins/Admin?page=home&action=showUserLike&index=${x.id}">Show
-									User Like</a> </td>
+									User Like</a> <a
+								href="${pageContext.request.contextPath}/admins/Admin?page=home&action=showUserShare&index=${x.id}">Show
+									User Share</a></td>
 						</tr>
 					</tbody>
 				</c:forEach>

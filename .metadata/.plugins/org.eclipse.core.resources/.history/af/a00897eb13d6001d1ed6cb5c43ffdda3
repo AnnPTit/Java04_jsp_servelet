@@ -1,0 +1,116 @@
+package entity;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "history")
+public class History {
+
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	@ManyToOne
+	@JoinColumn(name = "userId", nullable = false)
+	private User user;
+	@ManyToOne
+	@JoinColumn(name = "videoId", nullable = false)
+	private Video video;
+	@Column(name = "viewdate")
+	private Date viewDate;
+	@Column(name = "isLiked")
+	private Boolean isLiked;
+	@Column(name = "likedDate")
+	private Date likedDate;
+	@Column(name = "isShared")
+	private Boolean isShared;
+
+	
+
+	public History(Integer id, User user, Video video, Date viewDate, Boolean isLiked, Date likedDate,
+			Boolean isShared) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.video = video;
+		this.viewDate = viewDate;
+		this.isLiked = isLiked;
+		this.likedDate = likedDate;
+		this.isShared = isShared;
+	}
+
+	
+	public History() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+
+	public Boolean getIsShared() {
+		return isShared;
+	}
+
+
+	public void setIsShared(Boolean isShared) {
+		this.isShared = isShared;
+	}
+
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Video getVideo() {
+		return video;
+	}
+
+	public void setVideo(Video video) {
+		this.video = video;
+	}
+
+	public Date getViewDate() {
+		return viewDate;
+	}
+
+	public void setViewDate(Date viewDate) {
+		this.viewDate = viewDate;
+	}
+
+	public Boolean getIsLiked() {
+		return isLiked;
+	}
+
+	public void setIsLiked(Boolean isLiked) {
+		this.isLiked = isLiked;
+	}
+
+	public Date getLikedDate() {
+		return likedDate;
+	}
+
+	public void setLikedDate(Date likedDate) {
+		this.likedDate = likedDate;
+	}
+
+}

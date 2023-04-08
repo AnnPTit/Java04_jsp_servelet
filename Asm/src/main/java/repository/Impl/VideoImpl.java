@@ -20,6 +20,8 @@ public interface VideoImpl {
 
 	List<UserCustomModel> showUserLike(int videoId);
 
+	List<UserCustomModel> showUserShare(int videoId);
+
 	Video getVideo(int id);
 
 	Video getVideoByHref(String href);

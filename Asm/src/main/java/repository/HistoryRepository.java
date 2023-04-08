@@ -113,4 +113,18 @@ public class HistoryRepository implements HistoryImpl {
 		return null;
 	}
 
+	@Override
+	public Boolean updateHistory(History history) {
+		Transaction tran = null;
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			tran = session.beginTransaction();
+			session.update(history);
+			tran.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return false;
+	}
+
 }

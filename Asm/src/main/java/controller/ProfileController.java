@@ -42,20 +42,22 @@ public class ProfileController extends HttpServlet {
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		User user = userImpl.getUserbyUserName(username);
-		
-		Part part = request.getPart("avatar");
-		String fileName = part.getSubmittedFileName();
-		String uploadFile = "/upload/" + fileName;
-		String realPath = request.getRealPath(uploadFile);
-		if(fileName.endsWith("")) {
+
+		String fileName = uploadService.upload(request, "avatar");
+//		Part part = request.getPart("avatar");
+//		String fileName = part.getSubmittedFileName();
+//		String uploadFile = "/upload/" + fileName;
+//		String realPath = request.getRealPath(uploadFile);
+		if(fileName == null) {
 			request.getSession().setAttribute("userLogged", user);
-			request.setAttribute("avatar", fileName);
+			request.setAttribute("avatar", session.getAttribute("avartar"));
 			request.setAttribute("content", "profile");
 			request.setAttribute("erorr", "No file is chose!");
+//			request.setAttribute("avatar", "");
 			request.getRequestDispatcher("/views/video.jsp").forward(request, response);
 			return;
 		}
-		part.write(realPath);
+//		part.write(realPath);
 		session.setAttribute("avartar", fileName);
 		// Update avartar
 		user.setAvatar(fileName);

@@ -31,8 +31,11 @@ public class History {
 	private Boolean isLiked;
 	@Column(name = "likedDate")
 	private Date likedDate;
+	@Column(name = "isShared")
+	private Boolean isShared;
 
-	public History(Integer id, User user, Video video, Date viewDate, Boolean isLiked, Date likedDate) {
+	public History(Integer id, User user, Video video, Date viewDate, Boolean isLiked, Date likedDate,
+			Boolean isShared) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -40,11 +43,20 @@ public class History {
 		this.viewDate = viewDate;
 		this.isLiked = isLiked;
 		this.likedDate = likedDate;
+		this.isShared = isShared;
 	}
 
 	public History() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Boolean getIsShared() {
+		return isShared;
+	}
+
+	public void setIsShared(Boolean isShared) {
+		this.isShared = isShared;
 	}
 
 	public Integer getId() {
