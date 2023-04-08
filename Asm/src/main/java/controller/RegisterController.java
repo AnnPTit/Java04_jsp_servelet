@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entity.User;
 import repository.UserRepository;
+import repository.Impl.UserImpl;
 import util.EmailUtility;
 
 /**
@@ -19,7 +20,7 @@ import util.EmailUtility;
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserRepository userRepository = new UserRepository();
+	private UserImpl userRepository = new UserRepository();
 	EmailUtility emailUtility = new EmailUtility();
 
 	public RegisterController() {

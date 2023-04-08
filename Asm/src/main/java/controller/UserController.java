@@ -12,13 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import entity.User;
 import repository.UserRepository;
+import repository.Impl.UserImpl;
 
 @WebServlet("/index")
 public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	List<User> list = new ArrayList();
-	private UserRepository userRepository = new UserRepository();
+	private UserImpl userRepository = new UserRepository();
 
 	public UserController() {
 		super();

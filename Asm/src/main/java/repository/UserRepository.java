@@ -9,10 +9,12 @@ import org.hibernate.Transaction;
 import org.hibernate.Session;
 
 import entity.User;
+import repository.Impl.UserImpl;
 import util.HibernateUtil;
 
-public class UserRepository {
+public class UserRepository implements UserImpl {
 
+	@Override
 	public List<User> getList() {
 
 		List<User> list = new ArrayList();
@@ -25,6 +27,7 @@ public class UserRepository {
 		return list;
 	}
 
+	@Override
 	public User logIn(String user, String pass) {
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
 			Query query = session.createQuery("FROM User where username=: user and password =:pass");
@@ -38,6 +41,7 @@ public class UserRepository {
 		return null;
 	}
 
+	@Override
 	public Boolean updateUser(User user) {
 		Transaction tran = null;
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -51,6 +55,7 @@ public class UserRepository {
 		return false;
 	}
 
+	@Override
 	public Boolean createUser(User user) {
 		Transaction tran = null;
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -64,6 +69,7 @@ public class UserRepository {
 		return false;
 	}
 
+	@Override
 	public User getUserbyUserName(String user) {
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
 			Query query = session.createQuery("FROM User where username=: user ");
@@ -76,6 +82,7 @@ public class UserRepository {
 		return null;
 	}
 
+	@Override
 	public User getUserByEmail(String email) {
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
 			Query query = session.createQuery("FROM User where email=: email ");
@@ -88,6 +95,7 @@ public class UserRepository {
 		return null;
 	}
 
+	@Override
 	public User getUserByID(int id) {
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
 			Query query = session.createQuery("FROM User where id=: id ");
@@ -99,5 +107,7 @@ public class UserRepository {
 		}
 		return null;
 	}
+
+
 
 }

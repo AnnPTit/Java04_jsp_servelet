@@ -29,6 +29,8 @@ public class User {
 	private Boolean isAdmin;
 	@Column(name = "isActive")
 	private Boolean isActive;
+	@Column(name = "avatar")
+	private String avatar;
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<History> liHistories;
 
@@ -37,8 +39,10 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
+
+
 	public User(Integer id, String username, String password, String email, Boolean isAdmin, Boolean isActive,
-			List<History> liHistories) {
+			String avatar, List<History> liHistories) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -46,8 +50,24 @@ public class User {
 		this.email = email;
 		this.isAdmin = isAdmin;
 		this.isActive = isActive;
+		this.avatar = avatar;
 		this.liHistories = liHistories;
 	}
+
+	
+
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+
 
 	public Integer getId() {
 		return id;

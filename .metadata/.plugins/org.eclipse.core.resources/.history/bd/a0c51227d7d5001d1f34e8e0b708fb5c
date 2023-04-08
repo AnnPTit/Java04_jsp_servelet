@@ -1,0 +1,23 @@
+package repository.Impl.copy;
+
+import java.util.List;
+
+import entity.User;
+
+public interface UserImpl {
+
+	List<User> getList();
+
+	User logIn(String user, String pass);
+
+	Boolean updateUser(User user);
+
+	Boolean createUser(User user);
+
+	User getUserbyUserName(String user);
+
+	User getUserByEmail(String email);
+
+	User getUserByID(int id);
+
+}

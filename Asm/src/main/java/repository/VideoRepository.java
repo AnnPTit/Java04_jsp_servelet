@@ -13,9 +13,11 @@ import org.hibernate.query.NativeQuery;
 import customModel.UserCustomModel;
 import customModel.videoCustomModel;
 import entity.Video;
+import repository.Impl.VideoImpl;
 import util.HibernateUtil;
 
-public class VideoRepository {
+public class VideoRepository implements VideoImpl {
+	@Override
 	public List<Video> getList() {
 		List<Video> list = new ArrayList<Video>();
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -29,6 +31,7 @@ public class VideoRepository {
 	}
 
 
+	@Override
 	public List<videoCustomModel> getListSortByViewUp() {
 		List<videoCustomModel> list = new ArrayList<videoCustomModel>();
 		try (Session session = HibernateUtil.getFACTORY().openSession();) {
@@ -56,6 +59,7 @@ public class VideoRepository {
 		return null;
 
 	}
+	@Override
 	public List<videoCustomModel> getListSortByViewDown() {
 		List<videoCustomModel> list = new ArrayList<videoCustomModel>();
 		try (Session session = HibernateUtil.getFACTORY().openSession();) {
@@ -84,6 +88,7 @@ public class VideoRepository {
 
 	}
 
+	@Override
 	public List<videoCustomModel> getListSortByLikeUp() {
 		List<videoCustomModel> list = new ArrayList<videoCustomModel>();
 		try (Session session = HibernateUtil.getFACTORY().openSession();) {
@@ -111,6 +116,7 @@ public class VideoRepository {
 		return null;
 	}
 
+	@Override
 	public List<videoCustomModel> getListSortByLikeDown() {
 		List<videoCustomModel> list = new ArrayList<videoCustomModel>();
 		try (Session session = HibernateUtil.getFACTORY().openSession();) {
@@ -139,6 +145,7 @@ public class VideoRepository {
 
 	}
 
+	@Override
 	public List<UserCustomModel> showUserLike(int videoId) {
 		List<UserCustomModel> list = new ArrayList<UserCustomModel>();
 		try (Session session = HibernateUtil.getFACTORY().openSession();) {
@@ -159,6 +166,7 @@ public class VideoRepository {
 		return null;
 	}
 
+	@Override
 	public Video getVideo(int id) {
 		Video video = new Video();
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -172,6 +180,7 @@ public class VideoRepository {
 		return null;
 	}
 
+	@Override
 	public Video getVideoByHref(String href) {
 		Video video = new Video();
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -185,6 +194,7 @@ public class VideoRepository {
 		return null;
 	}
 
+	@Override
 	public List<Video> getVideoByTitle(String title) {
 		List<Video> video = new ArrayList<>();
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -198,6 +208,7 @@ public class VideoRepository {
 		return null;
 	}
 
+	@Override
 	public Boolean updateView(int videoID, int view) {
 		Transaction transaction = null;
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -214,6 +225,7 @@ public class VideoRepository {
 		return false;
 	}
 
+	@Override
 	public Boolean updateShare(int videoID, int view) {
 		Transaction transaction = null;
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -230,6 +242,7 @@ public class VideoRepository {
 		return false;
 	}
 
+	@Override
 	public Boolean create(Video video) {
 		Transaction transaction = null;
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -247,6 +260,7 @@ public class VideoRepository {
 		return false;
 	}
 
+	@Override
 	public Boolean update(Video video) {
 		Transaction transaction = null;
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -264,6 +278,7 @@ public class VideoRepository {
 		return false;
 	}
 
+	@Override
 	public Boolean delete(int videoID) {
 		Transaction transaction = null;
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -280,6 +295,7 @@ public class VideoRepository {
 		return false;
 	}
 
+	@Override
 	public List<Video> paginationVideo(int index) {
 		List<Video> ds = new ArrayList<>();
 

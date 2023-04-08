@@ -18,6 +18,9 @@ import entity.Video;
 import repository.HistoryRepository;
 import repository.UserRepository;
 import repository.VideoRepository;
+import repository.Impl.HistoryImpl;
+import repository.Impl.UserImpl;
+import repository.Impl.VideoImpl;
 import util.EmailUtility;
 
 @WebServlet(urlPatterns = { "/views/video", "/video/detail", "/like", "/views/favorite", "/views/sendEmail", "/share",
@@ -26,9 +29,9 @@ public class VideoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	List<Video> liVideos = new ArrayList<>();
-	VideoRepository videoRepository = new VideoRepository();
-	HistoryRepository historyRepository = new HistoryRepository();
-	UserRepository userRepository = new UserRepository();
+	VideoImpl videoRepository = new VideoRepository();
+	HistoryImpl historyRepository = new HistoryRepository();
+	UserImpl userRepository = new UserRepository();
 	EmailUtility emailUtility = new EmailUtility();
 
 	public VideoController() {
@@ -60,15 +63,16 @@ public class VideoController extends HttpServlet {
 		} else if (uri.contains("views/video")) {
 			HttpSession session1 = request.getSession();
 			String username = (String) session1.getAttribute("username");
-			request.setAttribute("username", username);
-
+			String avatar = (String) session1.getAttribute("avartar");			
+			if(avatar == null) {
+				avatar ="user.png";
+			}		
 			liVideos = videoRepository.getList();
 			int size = liVideos.size();
 			int itemPerPage = size / 6;
 			if (size % 6 != 0) {
 				itemPerPage++;
 			}
-
 			String page = request.getParameter("page");
 			int index = 0;
 			if (page == null) {
@@ -85,7 +89,10 @@ public class VideoController extends HttpServlet {
 			} else {
 				log = (Integer) session11.getAttribute("isLogin");
 			}
+			request.setAttribute("username", username);
+			request.setAttribute("avatar", avatar);
 			request.setAttribute("isLogin", log);
+			request.setAttribute("content", "content");
 			System.out.println(liVideos.size());
 			request.setAttribute("list", liVideos);
 			request.getRequestDispatcher("/views/video.jsp").forward(request, response);
@@ -132,7 +139,9 @@ public class VideoController extends HttpServlet {
 			List<History> listFavorite = historyRepository.getFavorite(user.getId());
 //			System.out.println(listFavorite);
 			request.setAttribute("listFavorite", listFavorite);
-			request.getRequestDispatcher("/views/MyFavorite.jsp").forward(request, response);
+			request.setAttribute("content", "myFavorite");
+			request.setAttribute("avatar", user.getAvatar());
+			request.getRequestDispatcher("/views/video.jsp").forward(request, response);
 
 		}
 

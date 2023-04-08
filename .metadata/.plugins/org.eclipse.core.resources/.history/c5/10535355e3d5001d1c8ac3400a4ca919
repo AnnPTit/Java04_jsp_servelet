@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<div >
+		<form method="POST" enctype="multipart/form-data" action="${pageContext.request.contextPath}/views/profile">
+			<div>
+				<label>Password</label>
+				<input  name="password" value="${userLogged.password}">
+			</div>
+			
+			<div>
+				<label>User Name</label>
+				<input name="fullName" value="${userLogged.username}">
+			</div>
+			
+			<div>
+				<label>Avatar</label>
+				<input type="file" name="avatar">
+			</div>
+			<div>
+				<img width="80" height="80" src="${pageContext.request.contextPath}/upload/${userLogged.avatar}">
+			</div>
+			
+			<div>
+				<input type="submit" value="Submit">
+			</div>
+		
+		</form>
+</div>

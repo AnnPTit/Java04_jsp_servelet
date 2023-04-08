@@ -23,6 +23,7 @@
 								<div class="collapse navbar-collapse tm-nav" id="navbar-nav">
 									<fmt:setLocale value="${sessionScope.lang}" scope="request" />
 									<fmt:setBundle basename="global" scope="request" />
+
 									<a href="?lang=vi" style="padding: 0 10px"><img
 										style="width: 40px; height: 25px" alt=""
 										src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Flag_of_North_Vietnam_%281955%E2%80%931976%29.svg/230px-Flag_of_North_Vietnam_%281955%E2%80%931976%29.svg.png" /></a>
@@ -70,12 +71,14 @@
 													style="color: black; font-size: 15px"
 													href="${pageContext.request.contextPath }/views/register"><fmt:message
 															key="memu.Resgister" /></a></li>
-
 												<li><hr class="dropdown-divider" /></li>
-												<li><a class="dropdown-item" href="#">Something
-														else here</a></li>
+												<li><a class="dropdown-item" href="${pageContext.request.contextPath }/views/profile">Set Avatar</a></li>
 											</ul></li>
-
+										<li class="nav-item"><img alt="Day la anh"
+											src="../upload/${avatar}"
+											style="width: 50px; height: 50px; border-radius: 50%">
+											
+											</li>
 									</ul>
 								</div>
 							</nav>
@@ -83,8 +86,6 @@
 					</div>
 				</div>
 			</div>
-
-
 		</div>
 		<div class="tm-welcome-container text-center text-white">
 			<div class="tm-welcome-container-inner">

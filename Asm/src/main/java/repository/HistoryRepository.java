@@ -11,10 +11,12 @@ import org.hibernate.Transaction;
 import entity.History;
 import entity.User;
 import entity.Video;
+import repository.Impl.HistoryImpl;
 import util.HibernateUtil;
 
-public class HistoryRepository {
+public class HistoryRepository implements HistoryImpl {
 
+	@Override
 	public History getHistoryByUserIdAndVideoId(int user, int video) {
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
 			Query query = session.createQuery("FROM History where userId=:userid and videoId=:videoid");
@@ -28,6 +30,7 @@ public class HistoryRepository {
 		return null;
 	}
 
+	@Override
 	public Boolean updateViewDate(int userId, int videoId, Date date) {
 		Transaction transaction = null;
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -46,6 +49,7 @@ public class HistoryRepository {
 		return false;
 	}
 
+	@Override
 	public Boolean createHistory(History history) {
 		Transaction tran = null;
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -59,6 +63,7 @@ public class HistoryRepository {
 		return false;
 	}
 
+	@Override
 	public Boolean like(int userId, int videoId) {
 		Transaction transaction = null;
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -77,6 +82,7 @@ public class HistoryRepository {
 		return false;
 	}
 
+	@Override
 	public Boolean unlike(int userId, int videoId) {
 		Transaction transaction = null;
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -94,6 +100,7 @@ public class HistoryRepository {
 		return false;
 	}
 
+	@Override
 	public List<History> getFavorite(int userID) {
 		try (Session session = HibernateUtil.getFACTORY().openSession()) {
 			Query query = session.createQuery("FROM History where userId=:userid and isLiked =1");

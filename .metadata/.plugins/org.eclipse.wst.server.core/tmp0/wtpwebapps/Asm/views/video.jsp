@@ -29,7 +29,7 @@
 
 	<section class="container">
 		
-		<jsp:include page="../Layout/content.jsp"></jsp:include>
+		<jsp:include page="../Layout/${content}.jsp"></jsp:include>
 	</section>
 	<div class="container">
 		<footer>

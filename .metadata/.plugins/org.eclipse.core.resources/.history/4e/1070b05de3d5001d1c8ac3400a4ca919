@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<div>
+	<form method="POST" enctype="multipart/form-data"
+		action="${pageContext.request.contextPath}/views/profile">
+
+		<div class="input-group mb-3">
+			<span class="input-group-text" id="basic-addon1">User Name</span> <input
+				type="text" class="form-control" placeholder="Username"
+				aria-label="Username" aria-describedby="basic-addon1" name="username" value="${userLogged.username}">
+		</div>
+		
+
+		<div>
+			<label>User Name</label> <input name="fullName"
+				value="${userLogged.username}">
+		</div>
+
+		<div>
+			<label>Avatar</label> <input type="file" name="avatar">
+		</div>
+		<div>
+			<img width="80" height="80"
+				src="${pageContext.request.contextPath}/upload/${userLogged.avatar}">
+		</div>
+
+		<div>
+			<input type="submit" value="Submit">
+		</div>
+
+	</form>
+</div>

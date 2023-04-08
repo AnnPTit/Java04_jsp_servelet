@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import entity.User;
 import repository.UserRepository;
+import repository.Impl.UserImpl;
 import util.EmailUtility;
 
 /**
@@ -26,7 +27,7 @@ public class LoginController extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	UserRepository userRepository = new UserRepository();
+	UserImpl userRepository = new UserRepository();
 	EmailUtility emailUtility = new EmailUtility();
 
 	public LoginController() {
@@ -59,6 +60,7 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("username", null);
 			session.setAttribute("password", null);
 			session.setAttribute("isLogin", 0);
+			session.setAttribute("avartar", "user.png");
 //			request.getRequestDispatcher("/views/login.jsp").forward(request, response);
 			String path = request.getContextPath();
 			response.sendRedirect(path + "/views/login");
@@ -94,6 +96,8 @@ public class LoginController extends HttpServlet {
 				session.setAttribute("password", password);
 				session.setAttribute("isLogin",1);
 				session.setAttribute("isAdmin", 0);
+				session.setAttribute("avartar",user.getAvatar());
+//				System.out.println(user.getAvatar());
 				String path = request.getContextPath();
 				if (user.getIsAdmin() == true) {
 					session.setAttribute("isAdmin", 1);

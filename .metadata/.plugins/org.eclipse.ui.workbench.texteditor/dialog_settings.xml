@@ -6,8 +6,12 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="avatar"/>
 		<list key="findhistory">
+			<item value="avatar"/>
+			<item value="my"/>
+			<item value="respone."/>
+			<item value="res"/>
 			<item value="tm-catalog-item-list"/>
 			<item value=".tm-catalog-item-lis"/>
 			<item value="Contact"/>
@@ -19,7 +23,6 @@
 			<item value="nav-icon fas fa-tachometer-alt"/>
 			<item value="img-circle elevation-2"/>
 			<item value="brand-link"/>
-			<item value="&lt;jsp:include page=&quot;../Layout/content.jsp&quot;&gt;&lt;/jsp:include&gt;"/>
 		</list>
 		<list key="replacehistory">
 		</list>

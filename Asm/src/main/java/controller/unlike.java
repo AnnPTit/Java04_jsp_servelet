@@ -16,6 +16,9 @@ import entity.Video;
 import repository.HistoryRepository;
 import repository.UserRepository;
 import repository.VideoRepository;
+import repository.Impl.HistoryImpl;
+import repository.Impl.UserImpl;
+import repository.Impl.VideoImpl;
 import util.EmailUtility;
 
 /**
@@ -29,9 +32,9 @@ public class unlike extends HttpServlet {
 	 * @see HttpServlet#HttpServlet()
 	 */
 	List<Video> liVideos = new ArrayList<>();
-	VideoRepository videoRepository = new VideoRepository();
-	HistoryRepository historyRepository = new HistoryRepository();
-	UserRepository userRepository = new UserRepository();
+	VideoImpl videoRepository = new VideoRepository();
+	HistoryImpl historyRepository = new HistoryRepository();
+	UserImpl userRepository = new UserRepository();
 	EmailUtility emailUtility = new EmailUtility();
 
 	public unlike() {

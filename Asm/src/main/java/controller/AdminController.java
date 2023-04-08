@@ -18,14 +18,17 @@ import entity.Video;
 import repository.HistoryRepository;
 import repository.UserRepository;
 import repository.VideoRepository;
+import repository.Impl.HistoryImpl;
+import repository.Impl.UserImpl;
+import repository.Impl.VideoImpl;
 
 @WebServlet(urlPatterns = { "/admins/Admin", "/admins/Admin/add", "/admins/Admin/update", "/admins/Admin/deleteUser" })
 public class AdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	List<Video> liVideos = new ArrayList<>();
-	VideoRepository videoRepository = new VideoRepository();
-	HistoryRepository historyRepository = new HistoryRepository();
-	UserRepository userRepository = new UserRepository();
+	VideoImpl videoRepository = new VideoRepository();
+	HistoryImpl historyRepository = new HistoryRepository();
+	UserImpl userRepository = new UserRepository();
 
 	public AdminController() {
 		super();
